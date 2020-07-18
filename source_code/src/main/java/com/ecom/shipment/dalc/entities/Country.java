@@ -30,8 +30,7 @@ public class Country {
     @Column(name = "modified")
     private Date modified;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_level_type")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "country")
     private LevelType levelType;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "country")

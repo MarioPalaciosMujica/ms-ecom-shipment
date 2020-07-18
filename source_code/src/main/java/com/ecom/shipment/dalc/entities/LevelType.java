@@ -21,14 +21,18 @@ public class LevelType {
     @Size(min = 2, max = 50, message = "name size not valid")
     private String name;
 
+    @Column(name = "level", nullable = false)
+    private int level;
+
     @Column(name = "created", nullable = false)
     private Date created;
 
     @Column(name = "modified")
     private Date modified;
 
-    @OneToMany(mappedBy = "levelType", fetch = FetchType.LAZY)
-    private Set<Country> countries;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_country")
+    private Country country;
 
     @OneToMany(mappedBy = "levelType", fetch = FetchType.LAZY)
     private Set<FirstLevel> firstLevels;
@@ -59,6 +63,14 @@ public class LevelType {
         this.name = name;
     }
 
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
     public Date getCreated() {
         return created;
     }
@@ -75,12 +87,12 @@ public class LevelType {
         this.modified = modified;
     }
 
-    public Set<Country> getCountries() {
-        return countries;
+    public Country getCountry() {
+        return country;
     }
 
-    public void setCountries(Set<Country> countries) {
-        this.countries = countries;
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
     public Set<FirstLevel> getFirstLevels() {
